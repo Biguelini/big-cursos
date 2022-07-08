@@ -1,0 +1,22 @@
+{
+  "name": "usersapi",
+  "version": "1.0.0",
+  "description": "Api para gerenciar os usuários do site",
+  "main": "index.js",
+  "repository": "https://github.com/Biguelini/big-cursos",
+  "author": "Biguelini",
+  "license": "MIT",
+  "dependencies": {
+    "@prisma/client": "^4.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.4.3",
+    "nodemon": "^2.0.19",
+    "prisma": "^4.0.0"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  }
+}
