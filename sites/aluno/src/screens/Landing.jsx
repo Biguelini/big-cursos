@@ -7,18 +7,21 @@ import ListaCursos from '../components/templates/listacursos/ListaCursos'
 import ChamadaFinal from '../components/templates/chamadafinal/ChamadaFinal'
 import Footer from '../components/templates/footer/Footer'
 import './Landing.css'
+import { Fade } from 'react-reveal'
 
 function App() {
     return (
         <>
             <Header />
-            <CTA/>
-            <Video/>
-            <Dados/>
-            <Depoimentos/>
-            <ListaCursos/>
-            <ChamadaFinal/>
-            <Footer/>
+            <CTA />
+            <Video />
+            <Fade delay={50}>
+                <Dados />
+                <Depoimentos />
+                <ListaCursos />
+                <ChamadaFinal />
+            </Fade>
+            <Footer />
         </>
     )
 }
