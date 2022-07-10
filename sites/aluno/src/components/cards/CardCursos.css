@@ -1,0 +1,17 @@
+.cursosCard{
+    display: flex;
+    flex-direction: row;
+    padding: 32px;
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    align-items: center;
+}
+.cursosCard .img{ 
+    width: 64px;
+    height: 64px;
+    margin-right: 16px;
+}
+.cursosCard .textInfo{
+    display: flex;
+    flex-direction: column;
+}

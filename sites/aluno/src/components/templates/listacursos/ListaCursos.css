@@ -1,0 +1,13 @@
+.listaCursos {
+    margin: 0 20vw 128px;
+}
+.listaCursos h1{
+    text-align: center;
+    margin-bottom: 32px;
+}
+.listaCursosGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+}
