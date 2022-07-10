@@ -1,0 +1,26 @@
+.CTA {
+    width: calc(60vw - (100vw - 100%));
+    padding: 214px 20vw 128px 20vw;
+    display: flex;
+    height: 400px;
+    align-items: center;
+}
+.titleCta {
+    margin: 0;
+}
+.containerCta {
+    margin-left: 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.titleCta span {
+    color: var(--primary);
+}
+.containerCta button {
+    margin: 24px;
+}
+.imgCta {
+    width: 400px;
+}

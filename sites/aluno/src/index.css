@@ -1,0 +1,33 @@
+:root {
+    --primary: #6451a5;
+    --primaryLight: #cbbff2;
+    --primaryDark: #2d244a;
+    --white: #fffbfe;
+    --error: #BA1B1B;
+    --errorLight: #FFDAD4;
+    --errorDark: #410001;
+    --secondary: #6D6782;
+    --secondaryLight: #C5BFDA;
+    --secondaryDark: #2D2A36;
+    --tertiary: #09BC8A;
+    --tertiaryLight: #86E7CB;
+    --tertiaryDark: #033D2D;
+    --black: #0A0908;
+    --greyLight: #CCC8CB;
+    --grey: #807D7F;
+    --greyDark: #4D4B4C;
+
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: var(--black);
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
+}

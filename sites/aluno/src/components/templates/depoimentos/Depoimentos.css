@@ -1,0 +1,8 @@
+.depoimentos {
+    margin: 0 20vw 128px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+    align-items: flex-start;
+}

@@ -1,0 +1,34 @@
+.container {
+    margin: 0 20vw 128px;
+    display: flex;
+}
+.textContainer {
+    width: 50%;
+    margin-right: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.text h2 {
+    font-weight: normal;
+    margin: 0;
+    color: var(--primary);
+}
+.text p {
+    margin: 12px 0 0 0 ;
+    color: var(--grey);
+}
+.text h2 span {
+    font-weight: bold;
+    color: var(--primaryDark);
+}
+.video {
+    border-radius: 8px;
+    border: 8px solid var(--primaryLight);
+    width: 50%;
+    aspect-ratio: 16 / 9;
+}
+.textContainer button {
+    margin-top: 24px;
+}
