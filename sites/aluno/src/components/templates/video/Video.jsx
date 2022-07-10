@@ -4,7 +4,7 @@ import React from 'react'
 
 export default function App(props) {
     return (
-        <div className="container">
+        <div className="videoContainer">
             <div className="textContainer">
                 <div className="text">
                     <h2>
