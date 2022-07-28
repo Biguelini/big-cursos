@@ -21,7 +21,7 @@
 }
 .text h2 span {
     font-weight: bold;
-    color: var(--primaryDark);
+    color: var(--tertiary);
 }
 .video {
     border-radius: 8px;
