@@ -7,16 +7,21 @@
   "author": "Biguelini",
   "license": "MIT",
   "dependencies": {
-    "@prisma/client": "^4.0.0",
+    "@prisma/client": "^4.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "jest": "^28.1.3",
     "mongoose": "^6.4.3",
     "nodemon": "^2.0.19",
-    "prisma": "^4.0.0"
+    "supertest": "^6.2.4"
   },
   "scripts": {
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "prisma": "^4.1.1"
   }
 }
