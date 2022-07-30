@@ -1,6 +1,10 @@
 const { PrismaClient } = require('@prisma/client')
 
 const prisma = new PrismaClient()
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+
+const secret = 'E8eUs1ql9N72x63JNuQLbsupjrMJ8sokFk0psN26XWBm1giJD2'
 class UserController {
     async getUsers(req, res) {
         try {
@@ -23,6 +27,7 @@ class UserController {
         try {
             await prisma.$connect()
             const { name, email, password } = req.body
+
             if (
                 name == '' ||
                 email == '' ||
@@ -39,16 +44,13 @@ class UserController {
                         .status(409)
                         .json({ message: 'Email is already used' })
                 } else {
-                    const createdUser = {
-                        name: name,
-                        email: email,
-                        password: password,
-                    }
-                    await prisma.user.create({
+                    const salt = await bcrypt.genSalt(12)
+                    const passwordHash = await bcrypt.hash(password, salt)
+                    const createdUser = await prisma.user.create({
                         data: {
                             name: name,
                             email: email,
-                            password: password,
+                            password: passwordHash,
                         },
                     })
                     return res
@@ -140,11 +142,26 @@ class UserController {
                 const user = await prisma.user.findUnique({
                     where: { email: email },
                 })
-                if (user.password === password) {
-                    return res.status(202).json({ message: "Logado" })
-                } else {
-                    return res.status(401).json({ message: "Invalid password or email" })
+                if (user) {
+                    const checkPassword = await bcrypt.compare(
+                        password,
+                        user.password
+                    )
+                    if (checkPassword) {
+                        const token = jwt.sign(
+                            {
+                                id: user._id,
+                            },
+                            secret
+                        )
+                        return res
+                            .status(202)
+                            .json({ message: 'Logado', token })
+                    }
                 }
+                return res
+                    .status(401)
+                    .json({ message: 'Invalid password or email' })
             }
             return res.status(406).json({ message: 'Invalid data' })
         } catch (e) {

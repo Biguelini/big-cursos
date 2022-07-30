@@ -91,7 +91,11 @@ describe('Test all the cases of email', () => {
     test('POST /users with duplicated email', async () => {
         await supertest(app)
             .post('/users')
-            .send({ name: 'arnaldo', email: 'teste@teste.com', password: '123sdfsdf' })
+            .send({
+                name: 'arnaldo',
+                email: 'teste@teste.com',
+                password: '123sdfsdf',
+            })
             .expect('Content-Type', /json/)
             .expect(409)
     })
@@ -108,7 +112,11 @@ describe('Try delete and create email', () => {
     test('POST /users after delete a duplicated email', async () => {
         await supertest(app)
             .post('/users')
-            .send({ name: 'arnaldo', email: 'teste@teste.com', password: '123sdfsdf' })
+            .send({
+                name: 'arnaldo',
+                email: 'teste@teste.com',
+                password: '123sdfsdf',
+            })
             .expect('Content-Type', /json/)
             .expect(201)
     })
@@ -142,5 +150,19 @@ describe('Trying login', () => {
             .send({ email: 'teste@teste.com', password: 'john123' })
             .expect('Content-Type', /json/)
             .expect(401)
+    })
+    test('LOGIN /users/login with incorrect email', async () => {
+        await supertest(app)
+            .post('/users/login')
+            .send({ email: 'teste@teste1234.com', password: 'john123' })
+            .expect('Content-Type', /json/)
+            .expect(401)
+    })
+    test('DELETE /users for clean the db', async () => {
+        await supertest(app)
+            .delete('/users')
+            .send({ email: 'teste@teste.com' })
+            .expect('Content-Type', /json/)
+            .expect(200)
     })
 })
