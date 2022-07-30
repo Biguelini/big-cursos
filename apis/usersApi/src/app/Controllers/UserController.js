@@ -78,13 +78,15 @@ class UserController {
                 if (!userExists) {
                     return res.status(404).json({ message: 'User not exists' })
                 } else {
+                    const salt = await bcrypt.genSalt(12)
+                    const passwordHash = await bcrypt.hash(password, salt)
                     const updatedUser = await prisma.user.update({
                         where: {
                             email: email,
                         },
                         data: {
                             name: name,
-                            password: password,
+                            password: passwordHash,
                         },
                     })
                     return res

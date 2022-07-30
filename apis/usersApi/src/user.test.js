@@ -8,6 +8,27 @@ describe('Test the basic crud', () => {
             .expect('Content-Type', /json/)
             .expect(200)
     })
+    test('POST /users without name', async () => {
+        await supertest(app)
+            .post('/users')
+            .send({ name: '', email: 'teste@teste.com', password: 'john' })
+            .expect('Content-Type', /json/)
+            .expect(406)
+    })
+    test('POST /users without email', async () => {
+        await supertest(app)
+            .post('/users')
+            .send({ name: 'john', email: '', password: 'john' })
+            .expect('Content-Type', /json/)
+            .expect(406)
+    })
+    test('POST /users without password', async () => {
+        await supertest(app)
+            .post('/users')
+            .send({ name: 'john', email: 'teste@teste.com', password: '' })
+            .expect('Content-Type', /json/)
+            .expect(406)
+    })
     test('POST /users', async () => {
         await supertest(app)
             .post('/users')
@@ -15,9 +36,9 @@ describe('Test the basic crud', () => {
             .expect('Content-Type', /json/)
             .expect(201)
     })
-    test('PATCH /users', async () => {
+    test('PUT /users', async () => {
         await supertest(app)
-            .patch('/users')
+            .put('/users')
             .send({
                 name: 'João',
                 email: 'teste@teste.com',
@@ -26,9 +47,9 @@ describe('Test the basic crud', () => {
             .expect('Content-Type', /json/)
             .expect(200)
     })
-    test('PATCH /users with an inexistant email', async () => {
+    test('PUT /users with an inexistant email', async () => {
         await supertest(app)
-            .patch('/users')
+            .put('/users')
             .send({
                 name: 'João',
                 email: 'teste@testenaovaiexistir.com',
@@ -36,6 +57,28 @@ describe('Test the basic crud', () => {
             })
             .expect('Content-Type', /json/)
             .expect(404)
+    })
+    test('PUT /users without name', async () => {
+        await supertest(app)
+            .put('/users')
+            .send({
+                name: '',
+                email: 'teste@teste.com',
+                password: 'senhasemnome',
+            })
+            .expect('Content-Type', /json/)
+            .expect(406)
+    })
+    test('PUT /users without password', async () => {
+        await supertest(app)
+            .put('/users')
+            .send({
+                name: 'João',
+                email: 'teste@teste.com',
+                password: '',
+            })
+            .expect('Content-Type', /json/)
+            .expect(406)
     })
     test('DELETE /users', async () => {
         await supertest(app)
