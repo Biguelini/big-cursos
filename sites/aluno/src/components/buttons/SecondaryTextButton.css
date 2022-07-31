@@ -5,10 +5,10 @@
     font-size: 1.1rem;
     border-radius: 8px;
     cursor: pointer;
-    color: var(--primaryLight);
+    color: var(--white);
     transition: .5s;
     font-weight: bold;
 }
 .secondaryTextButton:hover{
-    color: var(--white);
+    color: var(--primaryLight);
 }

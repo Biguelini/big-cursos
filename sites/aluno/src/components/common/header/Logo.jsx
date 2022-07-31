@@ -1,10 +1,11 @@
 import './Logo.css'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function App(props) {
-    return(
-        <span className="logo">
+    return (
+        <Link to="/" className="logo">
             BigCursos
-        </span>
+        </Link>
     )
 }

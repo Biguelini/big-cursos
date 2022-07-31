@@ -1,5 +1,5 @@
 .CTA {
-    padding: 214px 20vw 128px 20vw;
+    padding: 128px 20vw 128px 20vw;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
@@ -14,7 +14,7 @@
     align-items: center;
 }
 .titleCta span {
-    color: var(--primary);
+    color: var(--tertiary);
 }
 .containerCta button {
     margin-top: 24px;

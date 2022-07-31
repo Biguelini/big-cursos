@@ -1,7 +1,7 @@
-.primaryButton {
+.tertiaryButton {
     padding: 16px 32px;
     border: none;
-    background-color: var(--primary);
+    background-color: var(--tertiary);
     font-size: 1.1rem;
     border-radius: 8px;
     cursor: pointer;
@@ -9,6 +9,6 @@
     transition: 0.5s;
     font-weight: bold;
 }
-.primaryButton:hover {
+.tertiaryButton:hover {
     opacity: 0.8;
 }
