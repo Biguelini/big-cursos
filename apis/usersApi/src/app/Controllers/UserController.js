@@ -150,11 +150,11 @@ class UserController {
                         user.password
                     )
                     if (checkPassword) {
+                        const email = user.emal
                         const token = jwt.sign(
-                            {
-                                id: user._id,
-                            },
-                            secret
+                            { email },
+                            secret,
+                            { expiresIn: '86400s' }
                         )
                         return res
                             .status(202)
