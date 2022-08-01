@@ -10,5 +10,6 @@ routes.post('/users', UserController.postUser)
 routes.put('/users', UserController.editUser)
 routes.delete('/users', UserController.deleteUser)
 routes.post('/users/login', UserController.loginUser)
+routes.post('/users/auth', UserController.authUser)
 
 module.exports = routes

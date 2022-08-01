@@ -150,15 +150,13 @@ class UserController {
                         user.password
                     )
                     if (checkPassword) {
-                        const email = user.emal
-                        const token = jwt.sign(
-                            { email },
-                            secret,
-                            { expiresIn: '86400s' }
-                        )
+                        const email = user.email
+                        const token = jwt.sign({ email }, secret, {
+                            expiresIn: '86400s',
+                        })
                         return res
                             .status(202)
-                            .json({ message: 'Logado', token })
+                            .json({ message: 'Logado', email, token })
                     }
                 }
                 return res
@@ -166,6 +164,25 @@ class UserController {
                     .json({ message: 'Invalid password or email' })
             }
             return res.status(406).json({ message: 'Invalid data' })
+        } catch (e) {
+            console.log(e)
+            return res.status(500).json({ error: e })
+        } finally {
+            ;async () => {
+                await prisma.$disconnect()
+            }
+        }
+    }
+    async authUser(req, res) {
+        try {
+            await prisma.$connect()
+            const { token } = req.body
+            if (token) {
+                jwt.verify(token, secret)
+                return res.status(200).json({message: 'Requisição aceita'})
+            } else {
+                return res.status(401).json({ message: 'Invalid data' })
+            }
         } catch (e) {
             console.log(e)
             return res.status(500).json({ error: e })
