@@ -30,6 +30,11 @@ form input{
 form input:focus{
     border: 4px solid var(--primary);
 }
-.footer{
+form label{
+    text-align: left;
+    font-size: 1.2rem;
+    margin-bottom: 1rem ;
+}
+.login + .footer{
     display: none !important;    
 }
