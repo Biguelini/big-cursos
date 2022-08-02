@@ -1,1 +1,0 @@
-const secret = 'E8eUs1ql9N72x63JNuQLbsupjrMJ8sokFk0psN26XWBm1giJD2'

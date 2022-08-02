@@ -6,17 +6,36 @@ import React from 'react'
 
 export default function App(props) {
     let navigate = useNavigate()
-    const routeChange = () => {
+    const goLogin = () => {
         let path = `/login`
         navigate(path)
+    }
+    const goRegister = () => {
+        let path = `/cadastro`
+        navigate(path)
+    }
+    const logout = () => {
+        sessionStorage.clear()
+        return goLogin()
+    }
+    const token = sessionStorage.getItem('token')
+    if (!token) {
+        return (
+            <nav className="navBar">
+                <SecondaryTextButton
+                    text="Login"
+                    action={goLogin}
+                ></SecondaryTextButton>
+                <SecondaryButton text="Inscreva-se" action={goRegister}></SecondaryButton>
+            </nav>
+        )
     }
     return (
         <nav className="navBar">
             <SecondaryTextButton
-                text="Login"
-                action={routeChange}
+                text="Logado"
             ></SecondaryTextButton>
-            <SecondaryButton text="Inscreva-se"></SecondaryButton>
+            <SecondaryButton text="Sair" action={logout}></SecondaryButton>
         </nav>
     )
 }

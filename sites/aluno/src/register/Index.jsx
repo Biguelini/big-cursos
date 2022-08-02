@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import PrimaryButton from '../components/buttons/PrimaryButton'
-import './Login.css'
+import './Register.css'
 import axios from 'axios'
 
 export default function Index() {
@@ -11,28 +11,39 @@ export default function Index() {
     }
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [name, setName] = useState('')
     const login = (e) => {
         e.preventDefault()
         axios
-            .post('http://localhost:3030/users/login', {
+            .post('http://localhost:3030/users', {
                 email: email,
                 password: password,
+                name: name,
             })
             .then(function (response) {
                 sessionStorage.setItem('token', response.data.token)
                 return redirect('/cursos')
             })
             .catch(function (error) {
-                alert('Email ou senha incorretos')
+                alert('Informações inválidas')
                 console.log(error)
             })
         setEmail('')
         setPassword('')
+        setName('')
     }
     return (
-        <div className="login">
-            <h1>Login</h1>
+        <div className="register">
+            <h1>Cadastro</h1>
             <form>
+                <label>Digite seu nome:</label>
+                <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => {
+                        setName(e.target.value)
+                    }}
+                />
                 <label>Digite seu email:</label>
                 <input
                     type="text"
@@ -49,7 +60,7 @@ export default function Index() {
                         setPassword(e.target.value)
                     }}
                 />
-                <PrimaryButton text="Login" action={login} />
+                <PrimaryButton text="Cadastrar" action={login} />
             </form>
         </div>
     )
