@@ -1,33 +1,19 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useContext } from 'react'
+// import { useNavigate } from 'react-router-dom'
+
+import { AuthContext } from '../context/auth'
 import PrimaryButton from '../components/buttons/PrimaryButton'
 import './Login.css'
-import axios from 'axios'
+// import axios from 'axios'
 
 export default function Index() {
-    let navigate = useNavigate()
-    const redirect = (path) => {
-        navigate(path)
-    }
+    const { authenticated, login } = useContext(AuthContext)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const login = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
-        axios
-            .post('http://localhost:3030/users/login', {
-                email: email,
-                password: password,
-            })
-            .then(function (response) {
-                sessionStorage.setItem('token', response.data.token)
-                return redirect('/cursos')
-            })
-            .catch(function (error) {
-                alert('Email ou senha incorretos')
-                console.log(error)
-            })
-        setEmail('')
-        setPassword('')
+        console.log('submit', {email, password})
+        login(email, password)
     }
     return (
         <div className="login">
@@ -49,7 +35,7 @@ export default function Index() {
                         setPassword(e.target.value)
                     }}
                 />
-                <PrimaryButton text="Login" action={login} />
+                <PrimaryButton text="Login" action={handleSubmit} />
             </form>
         </div>
     )

@@ -1,69 +1,42 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Landing from '../landing/Index'
 import Login from '../login/Index'
 import Courses from '../courses/Index'
 import Register from '../register/Index'
 
-const ProtectedRoute = ({ children }) => {
-    const token = sessionStorage.getItem('token')
-
-    if (!token) {
-        return <Navigate to="/login" replace />
-    }
-    return children
-}
-const JustOpenRoute = ({ children }) => {
-    const token = sessionStorage.getItem('token')
-
-    if (token) {
-        return <Navigate to="/cursos" replace />
-    }
-    return children
-}
+import { AuthProvider, AuthContext } from '../context/auth'
 
 export default function RouteApps(props) {
+    const Private = ({children}) => {
+        const {authenticated, loading} = useContext(AuthContext)
+        if(loading){
+            return <div className="loading">Carregando...</div>
+        }
+        if(!authenticated){
+            return <Navigate to="/login" />
+        }
+        return children
+    }
     return (
-        <Routes>
-            <Route
-                exact
-                path="/"
-                element={
-                    <JustOpenRoute>
-                        <Landing />
-                    </JustOpenRoute>
-                }
-            />
-            <Route
-                exact
-                path="/login"
-                element={
-                    <JustOpenRoute>
-                        <Login />
-                    </JustOpenRoute>
-                }
-            />
-            <Route
-                exact
-                path="/cadastro"
-                element={
-                    <JustOpenRoute>
-                        <Register />
-                    </JustOpenRoute>
-                }
-            />
+        <AuthProvider>
+            <Routes>
+                <Route exact path="/" element={<Landing />} />
+                <Route exact path="/login" element={<Login />} />
+                <Route exact path="/cadastro" element={<Register />} />
 
-            <Route
-                exact
-                path="/cursos"
-                element={
-                    <ProtectedRoute>
-                        <Courses />
-                    </ProtectedRoute>
-                }
-            />
+                <Route
+                    exact
+                    path="/cursos"
+                    element={
+                        <Private>
+                            <Courses />
+                        </Private>
+                    }
+                />
 
-            <Route path="*" element={<Landing />} />
-        </Routes>
+                <Route path="*" element={<Landing />} />
+            </Routes>
+        </AuthProvider>
     )
 }
