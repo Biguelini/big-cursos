@@ -3,6 +3,7 @@ const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const jwt_decode = require('jwt-decode')
 
 const secret = 'E8eUs1ql9N72x63JNuQLbsupjrMJ8sokFk0psN26XWBm1giJD2'
 class UserController {
@@ -176,10 +177,16 @@ class UserController {
     async authUser(req, res) {
         try {
             await prisma.$connect()
-            const { token } = req.body
+            const { token, email } = req.body
             if (token) {
                 jwt.verify(token, secret)
-                return res.status(200).json({message: 'Requisição aceita'})
+                const tokenEmail = jwt_decode(token).email
+                if (email === tokenEmail) {
+                    return res
+                        .status(200)
+                        .json({ message: 'Requisição aceita' })
+                }
+                return res.status(401).json({ message: 'Invalid data' })
             } else {
                 return res.status(401).json({ message: 'Invalid data' })
             }

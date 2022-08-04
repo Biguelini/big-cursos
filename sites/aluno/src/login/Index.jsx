@@ -1,40 +1,40 @@
 import { useState, useContext } from 'react'
-// import { useNavigate } from 'react-router-dom'
 
 import { AuthContext } from '../context/auth'
 import PrimaryButton from '../components/buttons/PrimaryButton'
 import './Login.css'
-// import axios from 'axios'
+import TextInput from '../components/form/TextInput'
+import PasswordInput from '../components/form/PasswordInput'
 
 export default function Index() {
-    const { authenticated, login } = useContext(AuthContext)
+    const {login } = useContext(AuthContext)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log('submit', {email, password})
         login(email, password)
+    }
+    const handleEmail = (e) => {
+        setEmail(e.target.value)
+    }
+    const handlePassword = (e) => {
+        setPassword(e.target.value)
     }
     return (
         <div className="login">
             <h1>Login</h1>
             <form>
-                <label>Digite seu email:</label>
-                <input
-                    type="text"
+                <TextInput
+                    label="Digite seu email: "
                     value={email}
-                    onChange={(e) => {
-                        setEmail(e.target.value)
-                    }}
+                    setValue={handleEmail}
                 />
-                <label>Digite sua senha:</label>
-                <input
-                    type="text"
+                <PasswordInput
+                    label="Digite sua senha: "
                     value={password}
-                    onChange={(e) => {
-                        setPassword(e.target.value)
-                    }}
+                    setValue={handlePassword}
                 />
+
                 <PrimaryButton text="Login" action={handleSubmit} />
             </form>
         </div>

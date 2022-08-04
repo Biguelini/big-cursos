@@ -51,3 +51,14 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
         monospace;
 }
+
+
+.loading ~ .footer{
+    display: none;
+}
+
+.loading{
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 30vh;
+}
