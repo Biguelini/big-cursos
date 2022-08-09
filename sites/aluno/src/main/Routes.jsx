@@ -4,6 +4,7 @@ import Landing from '../landing/Index'
 import Login from '../login/Index'
 import Courses from '../courses/Index'
 import Register from '../register/Index'
+import CoursePage from '../courses/CoursePage'
 
 import { AuthProvider, AuthContext } from '../context/auth'
 
@@ -13,7 +14,7 @@ export default function RouteApps(props) {
         if (loading) {
             return <div className="loading">Carregando...</div>
         }
-        if (!authenticated) {
+        if (!authenticated && !loading) {
             return <Navigate to="/login" />
         }
         return children
@@ -23,7 +24,7 @@ export default function RouteApps(props) {
         if (loading) {
             return <div className="loading">Carregando...</div>
         }
-        if (authenticated) {
+        if (authenticated && !loading) {
             return <Navigate to="/cursos" />
         }
         return children
@@ -34,7 +35,6 @@ export default function RouteApps(props) {
                 <Route exact path="/" element={<Landing />} />
 
                 <Route
-                    exact
                     path="/login"
                     element={
                         <Public>
@@ -43,7 +43,6 @@ export default function RouteApps(props) {
                     }
                 />
                 <Route
-                    exact
                     path="/cadastro"
                     element={
                         <Public>
@@ -61,6 +60,7 @@ export default function RouteApps(props) {
                         </Private>
                     }
                 />
+                <Route path="/cursos/:id" element={<CoursePage />} />
 
                 <Route path="*" element={<Landing />} />
             </Routes>

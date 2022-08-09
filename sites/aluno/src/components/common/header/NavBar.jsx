@@ -19,11 +19,16 @@ export default function App(props) {
         let path = `/cadastro`
         navigate(path)
     }
+    const goCourse = () => {
+        let path = `/cursos`
+        navigate(path)
+    }
     if(authenticated){
         return (
             <nav className="navBar">
                 <SecondaryTextButton
                     text="Logado"
+                    action={goCourse}
                 ></SecondaryTextButton>
                 <SecondaryButton
                     text="Sair"
