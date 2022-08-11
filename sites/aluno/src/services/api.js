@@ -12,3 +12,6 @@ export const verifyUser = async (email, token) => {
 export const createUser = async (name, email, password) => {
     return api.post('/users', { name, email, password })
 }
+export const getCourses = async () =>{
+    return api.get('/courses')
+}

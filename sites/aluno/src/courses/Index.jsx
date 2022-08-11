@@ -1,6 +1,18 @@
 import './Courses.css'
 import CardCourses from '../components/courses/CardCourses'
+import { useEffect, useState } from 'react'
+import { getCourses } from '../services/api'
 export default function Index() {
+    const [courses, setCourses] = useState("");
+    const listCourses = () => {
+        getCourses().then(function (response) {
+            const data = response.data.allCourses
+            setCourses(data)
+        })
+    }
+    useEffect(() => {
+        listCourses()
+    }, [])
     return (
         <div className="cursos">
             <h1>Cursos</h1>

@@ -1,8 +1,10 @@
 import './CoursePages.css'
 
 import { Link, useParams } from 'react-router-dom'
+
 export default function Index() {
     const { idCourse, idVideo } = useParams()
+
     return (
         <div className="curso">
             <span className="category">
@@ -13,7 +15,14 @@ export default function Index() {
                 poster="https://i.ytimg.com/vi/8i4ltPu5a5w/maxresdefault.jpg"
             >
                 <source
-                    src={process.env.PUBLIC_URL + '/videos/' + idCourse + '/' + idVideo +'.mp4' }
+                    src={
+                        process.env.PUBLIC_URL +
+                        '/videos/' +
+                        idCourse +
+                        '/' +
+                        idVideo +
+                        '.mp4'
+                    }
                     type="video/mp4"
                 />
             </video>
@@ -37,28 +46,34 @@ export default function Index() {
                 <p>80 aulas</p>
                 <div className="videos">
                     <ul>
-                        <li>Bem-vindo</li>
-                        <li>Introdução ao JavaScript</li>
-                        <li>Variáveis</li>
+                        <li>
+                            <Link to={'/cursos/' + idCourse + '/bemvindo'}>
+                                Bem-vindo{' '}
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to={'/cursos/' + idCourse + '/oqueejavascript'}
+                            >
+                                O que é o JavaScript?
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to={'/cursos/' + idCourse + '/primeiroprojeto'}
+                            >
+                                Primeiro projeto
+                            </Link>
+                        </li>
                     </ul>
                 </div>
             </div>
             <div className="requisits">
                 <h3>Requisitos</h3>
                 <ul>
-                    <li>
-                        <Link to={"/cursos/" + idCourse + "/bemvindo"}>Bem-vindo </Link>
-                    </li>
-                    <li>
-                        <Link to={"/cursos/" + idCourse + "/oqueejavascript"}>
-                            O que é o JavaScript?
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to={"/cursos/" + idCourse + "/primeiroprojeto"}>
-                            Primeiro projeto
-                        </Link>
-                    </li>
+                    <li>Bem-vindo</li>
+                    <li>Introdução ao JavaScript</li>
+                    <li>Variáveis</li>
                 </ul>
             </div>
             <div className="description">

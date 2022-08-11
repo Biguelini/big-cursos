@@ -1,0 +1,51 @@
+const { PrismaClient } = require('@prisma/client')
+
+const prisma = new PrismaClient()
+
+class AdminController {
+    async getCourses(req, res) {
+        try {
+            await prisma.$connect()
+            const allCourses = await prisma.courses.findMany()
+            return res.status(200).json({ allCourses })
+        } catch (e) {
+            return res.status(404).json(e)
+        } finally {
+            ;async () => {
+                await prisma.$disconnect()
+            }
+        }
+    }
+    async postCourse(req, res) {
+        const { name, subtitle, instructor, content, description } = req.body
+        try {
+            await prisma.$connect()
+            const duplicatedCourse = await prisma.courses.findUnique({
+                where: { name: name },
+            })
+            if (duplicatedCourse) {
+                return res.status(409).json({ msg: 'Course already exists' })
+            } else {
+                const createdCourse = await prisma.courses.create({
+                    data: {
+                        name,
+                        subtitle,
+                        instructor,
+                        content,
+                        description,
+                        videos: [],
+                    },
+                })
+                return res.status(200).json(createdCourse)
+            }
+        } catch (e) {
+            console.log(e)
+            return res.status(500).json({ error: e })
+        } finally {
+            ;async () => {
+                await prisma.$disconnect()
+            }
+        }
+    }
+}
+module.exports = new AdminController()
