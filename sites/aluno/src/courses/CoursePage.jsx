@@ -1,19 +1,19 @@
 import './CoursePages.css'
 
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 export default function Index() {
-    const { id } = useParams()
+    const { idCourse, idVideo } = useParams()
     return (
         <div className="curso">
             <span className="category">
-                <a href="">Desenvolvimento</a>
+                <Link to="/categorias/desenvolvimento">Desenvolvimento</Link>
             </span>
             <video
                 controls
                 poster="https://i.ytimg.com/vi/8i4ltPu5a5w/maxresdefault.jpg"
             >
                 <source
-                    src={process.env.PUBLIC_URL + '/videos/video.mp4'}
+                    src={process.env.PUBLIC_URL + '/videos/' + idCourse + '/' + idVideo +'.mp4' }
                     type="video/mp4"
                 />
             </video>
@@ -47,13 +47,17 @@ export default function Index() {
                 <h3>Requisitos</h3>
                 <ul>
                     <li>
-                        <a href="">Bem-vindo</a>
+                        <Link to={"/cursos/" + idCourse + "/bemvindo"}>Bem-vindo </Link>
                     </li>
                     <li>
-                        <a href="">O que é o JavaScript?</a>
+                        <Link to={"/cursos/" + idCourse + "/oqueejavascript"}>
+                            O que é o JavaScript?
+                        </Link>
                     </li>
                     <li>
-                        <a href="">Bem-vindo</a>
+                        <Link to={"/cursos/" + idCourse + "/primeiroprojeto"}>
+                            Primeiro projeto
+                        </Link>
                     </li>
                 </ul>
             </div>

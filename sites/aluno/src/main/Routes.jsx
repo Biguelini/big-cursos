@@ -60,7 +60,14 @@ export default function RouteApps(props) {
                         </Private>
                     }
                 />
-                <Route path="/cursos/:id" element={<CoursePage />} />
+                <Route
+                    path="/cursos/:idCourse/:idVideo"
+                    element={
+                        <Private>
+                            <CoursePage />
+                        </Private>
+                    }
+                />
 
                 <Route path="*" element={<Landing />} />
             </Routes>

@@ -17,17 +17,20 @@ export const AuthProvider = ({ children }) => {
                     .then(function (response) {
                         setToken(recoveredToken)
                         setUser(recoveredEmail)
+                        setLoading(false)
                     })
                     .catch(function (error) {
                         console.log(error)
                         setToken(null)
                         setUser(null)
+                        setLoading(false)
                     })
             } else {
                 setToken(null)
                 setUser(null)
+                setLoading(false)
             }
-            setLoading(false)
+            
         }
         tokenVerification()
     }, [token])

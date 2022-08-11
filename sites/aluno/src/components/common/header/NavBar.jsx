@@ -27,7 +27,7 @@ export default function App(props) {
         return (
             <nav className="navBar">
                 <SecondaryTextButton
-                    text="Logado"
+                    text="Cursos"
                     action={goCourse}
                 ></SecondaryTextButton>
                 <SecondaryButton
