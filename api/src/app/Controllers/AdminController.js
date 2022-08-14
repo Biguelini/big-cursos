@@ -26,6 +26,8 @@ class AdminController {
             if (duplicatedCourse) {
                 return res.status(409).json({ msg: 'Course already exists' })
             } else {
+                const image = 'http://localhost:3030/files/' + req.file.filename
+                console.log(image)
                 const createdCourse = await prisma.courses.create({
                     data: {
                         name,
