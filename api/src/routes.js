@@ -18,5 +18,6 @@ routes.post('/users/auth', UserController.authUser)
 routes.get('/courses', AdminController.getCourses)
 routes.post('/courses', upload.single('cover'), AdminController.postCourse)
 routes.post('/upload', upload.single('video'), VideoController.postUpload)
+routes.post('/course', VideoController.getUniqueCourse)
 
 module.exports = routes

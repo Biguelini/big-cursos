@@ -61,7 +61,7 @@ export default function RouteApps(props) {
                     }
                 />
                 <Route
-                    path="/cursos/:idCourse/:idVideo"
+                    path="/cursos/:idCourse"
                     element={
                         <Private>
                             <CoursePage />

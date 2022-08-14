@@ -33,9 +33,10 @@ class AdminController {
                         name,
                         subtitle,
                         instructor,
-                        content,
+                        content, 
                         description,
                         videos: [],
+                        image,
                     },
                 })
                 return res.status(200).json(createdCourse)

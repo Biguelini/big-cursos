@@ -1,98 +1,63 @@
 import './CoursePages.css'
 
-import { Link, useParams } from 'react-router-dom'
-
+import {  useParams } from 'react-router-dom'
+import { getUniqueCourse } from '../services/api'
+import { useState, useEffect } from 'react'
 export default function Index() {
-    const { idCourse, idVideo } = useParams()
-
+    const { idCourse } = useParams()
+    const [course, setCourse] = useState({})
+    const [actualVideo, setActualVideo] = useState('')
+    useEffect(() => {
+        const getCourseData = () => {
+            getUniqueCourse(idCourse).then(function (response) {
+                const data = response.data
+                const allVideos = data.videos.length !== 0 ? data.videos[0].split('/') : ''
+                const first = data.videos.length !== 0 ?'http://localhost:3030/files/'+ allVideos[allVideos.length - 1]:''
+                setCourse(data)
+                setActualVideo(first)
+            })
+        }
+        getCourseData()
+    }, [idCourse, actualVideo])
     return (
         <div className="curso">
-            <span className="category">
-                <Link to="/categorias/desenvolvimento">Desenvolvimento</Link>
-            </span>
-            <video
-                controls
-                poster="https://i.ytimg.com/vi/8i4ltPu5a5w/maxresdefault.jpg"
-            >
+            <video controls poster={course.image}>
                 <source
-                    src={
-                        process.env.PUBLIC_URL +
-                        '/videos/' +
-                        idCourse +
-                        '/' +
-                        idVideo +
-                        '.mp4'
-                    }
+                    src={'http://localhost:3030/files/1660502501660_2022-08-11 21-08-27.mp4'}
                     type="video/mp4"
                 />
             </video>
 
-            <h1>Curso JavaScript</h1>
-            <h3 className="subtitle">
-                Aprenda a criar aplicações em JavaScrpt
-            </h3>
-            <p>Prof Jurandir</p>
+            <h1>{course.name}</h1>
+            <h3 className="subtitle">{course.subtitle}</h3>
+            <p>{course.instructor}</p>
             <fieldset className="learn">
                 <h3>O que você aprenderá?</h3>
 
                 <ul>
-                    <li>Desenvolver aplicações modernas</li>
-                    <li>As tecnologias mais famosas do mercado</li>
-                    <li>Criar sites completos</li>
+                    {course.content?.map((topic) => (
+                        <li key={topic}>{topic}</li>
+                    ))}
                 </ul>
             </fieldset>
             <div className="courseContent">
                 <h3>Conteúdo do curso</h3>
-                <p>80 aulas</p>
+                <p>{course.videos?.length} aulas</p>
                 <div className="videos">
                     <ul>
-                        <li>
-                            <Link to={'/cursos/' + idCourse + '/bemvindo'}>
-                                Bem-vindo{' '}
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to={'/cursos/' + idCourse + '/oqueejavascript'}
-                            >
-                                O que é o JavaScript?
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to={'/cursos/' + idCourse + '/primeiroprojeto'}
-                            >
-                                Primeiro projeto
-                            </Link>
-                        </li>
+                        {course.videos?.map((video) => (
+                            <li className="link" key={video}>
+                                {video}
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </div>
-            <div className="requisits">
-                <h3>Requisitos</h3>
-                <ul>
-                    <li>Bem-vindo</li>
-                    <li>Introdução ao JavaScript</li>
-                    <li>Variáveis</li>
-                </ul>
-            </div>
+
             <div className="description">
                 <h3>Descrição</h3>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Fusce consectetur tincidunt magna, non vulputate erat
-                    bibendum nec. Nullam et tempor nisi. Donec tristique eros
-                    eleifend ultricies congue. Vivamus convallis nunc non
-                    vestibulum hendrerit. Fusce lacus lorem, congue in ornare
-                    et, fermentum vel magna. Vestibulum mi orci, semper et odio
-                    vitae, lobortis feugiat nisi. Etiam ligula arcu, facilisis
-                    eget lorem nec, rutrum vehicula orci. Donec metus orci,
-                    facilisis sed pulvinar suscipit, iaculis sit amet velit.
-                    Nullam a nisl auctor, facilisis enim sed, tincidunt neque.
-                    Ut ac tincidunt arcu, vitae iaculis leo. Duis sed magna eget
-                    lacus vulputate tincidunt et non lorem. Phasellus ornare
-                    erat quis ex finibus vulputate. Aenean pulvinar ligula a
-                    diam varius rhoncus vitae nec sapien.
+                    {course.description}
                 </p>
             </div>
         </div>

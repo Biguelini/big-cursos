@@ -21,10 +21,11 @@
     background-color: #121018;
 }
 
-.videos a {
+.videos .link {
     text-decoration: none;
     color: var(--primary);
     font-weight: bold;
+    cursor: pointer;
 }
 .videos ul li {
     list-style-type: none;
