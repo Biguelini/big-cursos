@@ -1,28 +1,24 @@
 import './CoursePages.css'
 
-import { useParams } from 'react-router-dom'
+import {  useParams } from 'react-router-dom'
 import { getUniqueCourse } from '../services/api'
 import { useState } from 'react'
 export default function Index() {
-    const { idCourse } = useParams()
+    const { idCourse, idVideo } = useParams()
     const [course, setCourse] = useState({})
-    const [actualVideo, setActualVideo] = useState('')
     getUniqueCourse(idCourse).then(function (response) {
         const data = response.data
-        const allVideos =
-            data.videos.length !== 0 ? data.videos[0].split('/') : ''
-        const first =
-            data.videos.length !== 0
-                ? 'http://localhost:3030/files/' +
-                  allVideos[allVideos.length - 1]
-                : ''
         setCourse(data)
-        setActualVideo(first.toString())
     })
+
     return (
         <div className="curso">
+            <h1>{idVideo}</h1>
             <video controls poster={course.image}>
-                <source src={actualVideo} type="video/mp4" />
+                <source
+                    src={'http://localhost:3030/files/' + idVideo + '.mp4'}
+                    type="video/mp4"
+                />
             </video>
 
             <h1>{course.name}</h1>
@@ -44,7 +40,16 @@ export default function Index() {
                     <ul>
                         {course.videos?.map((video) => (
                             <li className="link" key={video}>
-                                {video}
+                                <a
+                                    href={
+                                        'http://localhost:3000/cursos/' +
+                                        course.id +
+                                        '/' +
+                                        video
+                                    }
+                                >
+                                    {video}
+                                </a>
                             </li>
                         ))}
                     </ul>

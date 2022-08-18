@@ -14,8 +14,7 @@ class VideoController {
                 console.log('não deu')
                 return res.status(404).json({ msg: 'Course not foud' })
             } else {
-                const urlVideo =
-                    'http://localhost:3030/files/' + req.file.filename
+                const urlVideo = req.file.filename.split('.')[0]
                 let videos = existCourse.videos
                 console.log(videos)
                 videos.push(urlVideo)

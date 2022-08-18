@@ -15,7 +15,7 @@ model courses {
   instructor  String
   name        String   @unique
   subtitle    String
-  videos      Json?
+  videos      String[]
 }
 
 model user {
