@@ -13,8 +13,9 @@ export default function CoursesCard(props) {
     }, [props.id]);
     
     let navigate = useNavigate()
-    const url = '/cursos/' + props.id + '/' + course.videos
-    console.log(url)
+    const first = course?.videos ? course?.videos[0] : ''
+    const url = '/cursos/' + props.id + '/' + first
+    console.log(url, first)
     return (
         <div
             className="coursesContainer"

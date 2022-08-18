@@ -1,6 +1,6 @@
 import './CoursePages.css'
 
-import {  useParams } from 'react-router-dom'
+import {  useNavigate, useParams } from 'react-router-dom'
 import { getUniqueCourse } from '../services/api'
 import { useState } from 'react'
 export default function Index() {
@@ -10,7 +10,11 @@ export default function Index() {
         const data = response.data
         setCourse(data)
     })
-
+    const navigate = useNavigate()
+    if(idVideo === 'undefined'){
+        alert('Esse curso não possui aulas')
+        return navigate('/cursos')
+    }
     return (
         <div className="curso">
             <h1>{idVideo}</h1>
