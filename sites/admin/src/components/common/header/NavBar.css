@@ -1,0 +1,16 @@
+.navBar{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    margin-right: 20vw;
+}
+.navBar button:not(:first-child) {
+    margin-left: 16px;
+}
+@media (max-width: 820px){
+    .navBar{
+        justify-content: center;
+        margin-top: 16px;
+        margin-right: 0;
+    }
+}

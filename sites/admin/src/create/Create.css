@@ -1,0 +1,21 @@
+.register {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.register h1 {
+    margin-top: 10vh;
+    margin-bottom: 32px;
+    font-size: 3rem;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    max-width: 500px;
+}
+.register + .footer {
+    display: none !important;
+}

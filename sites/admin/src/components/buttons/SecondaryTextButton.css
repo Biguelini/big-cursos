@@ -1,0 +1,14 @@
+.secondaryTextButton{
+    padding: 16px 32px;
+    border: none;
+    background-color: transparent;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--white);
+    transition: .5s;
+    font-weight: bold;
+}
+.secondaryTextButton:hover{
+    color: var(--primaryLight);
+}

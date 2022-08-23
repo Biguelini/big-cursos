@@ -1,0 +1,54 @@
+:root {
+  --primary: #6451a5;
+  --primaryLight: #cbbff2;
+  --primaryDark: #2d244a;
+  --black: #1b1924;
+  --error: #ba1b1b;
+  --errorLight: #ffdad4;
+  --errorDark: #410001;
+  --secondary: #6d6782;
+  --secondaryLight: #c5bfda;
+  --secondaryDark: #2d2a36;
+  --tertiary: #09bc8a;
+  --tertiaryLight: #86e7cb;
+  --tertiaryDark: #033d2d;
+  --white: #f3f3f3;
+  --greyLight: #ccc8cb;
+  --grey: #807d7f;
+  --greyDark: #4d4b4c;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+body::-webkit-scrollbar {
+  width: 5px; /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--black); /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--black); /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 3px solid var(--greyDark); /* creates padding around scroll thumb */
+}
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--white);
+  background-color: var(--black);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+}
+

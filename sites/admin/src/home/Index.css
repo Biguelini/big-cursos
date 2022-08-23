@@ -1,0 +1,24 @@
+.cursos h1{
+    text-align: center;
+    padding-bottom: 64px;
+    margin: 0;
+}
+
+.listCursos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+}
+.cursos {
+    margin: 64px 20vw 0 20vw;
+    min-height: calc(100vh - 95px - 64px);
+}
+.cursos + .footer{
+    display: none;
+}
+@media screen and (max-width: 1000px) {
+    .listCursos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
