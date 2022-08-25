@@ -19,3 +19,20 @@ form {
 .register + .footer {
     display: none !important;
 }
+.formCadastro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.formCadastro button{
+    margin-bottom: 64px;
+}
+.formCadastro h1{
+    margin: 64px 0 32px 0;
+}
+input[type="file"], input[type="file"]:focus{
+    border: none;
+    background: none;
+    cursor: pointer;
+}   

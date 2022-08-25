@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function CoursesCard(props) {
     let navigate = useNavigate()
-    const url = '/cursos/' + props.id
+    const url = '/curso/' + props.id
     return (
         <div
             className="coursesContainer"
