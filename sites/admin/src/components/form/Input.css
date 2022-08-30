@@ -16,3 +16,14 @@ form label {
     font-size: 1.2rem;
     margin-bottom: 1rem;
 }
+form textarea {
+    margin-bottom: 32px;
+    font-size: 1.1rem;
+    padding: 12px 8px;
+    border-radius: 8px;
+    outline: none;
+    border: 4px solid var(--white);
+    background: var(--white);
+    transition: border 0.1s;
+    font-family: 'Inter', sans-serif;
+}

@@ -10,20 +10,26 @@ export const getCourses = async () => {
 export const getUniqueCourse = async (id) => {
     return api.post('/course', { id })
 }
-export const postCourse = async (
+export const putCourse = async (
     name,
     subtitle,
     instructor,
     content,
-    description,
-    cover
+    description
 ) => {
-    return api.post('/courses', {
+    return api.put('/courses', {
         name,
         subtitle,
         instructor,
         content,
         description,
-        cover,
     })
+}
+export const deleteVideo = async (id, videos) => {
+    return api.post('/deleteVideo', { id, videos })
+}
+export const deleteCourse = async (name) => {
+    const url = '/deleteCourse/' + name
+    console.log(url)
+    return api.delete(url)
 }

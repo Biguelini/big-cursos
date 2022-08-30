@@ -51,5 +51,61 @@ class AdminController {
             }
         }
     }
+    async putCourse(req, res) {
+        const { name, subtitle, instructor, content, description } = req.body
+        console.log(name, subtitle, instructor, content, description)
+        try {
+            await prisma.$connect()
+            const existCourse = await prisma.courses.findUnique({
+                where: { name: name },
+            })
+            if (!existCourse) {
+                return res.status(409).json({ msg: 'Course not exists' })
+            } else {
+                const updatedCourse = await prisma.courses.update({
+                    where: { name: name },
+                    data: {
+                        name,
+                        subtitle,
+                        instructor,
+                        content,
+                        description,
+                    },
+                })
+                return res.status(200).json(updatedCourse)
+            }
+        } catch (e) {
+            console.log(e)
+            return res.status(500).json({ error: e })
+        } finally {
+            ;async () => {
+                await prisma.$disconnect()
+            }
+        }
+    }
+    async deleteCourse(req, res) {
+        const name = req.params.name
+        try {
+            await prisma.$connect()
+            const existCourse = await prisma.courses.findUnique({
+                where: { name: name },
+            })
+            if (!existCourse) {
+                return res.status(409).json({ msg: 'Course not exists' })
+            } else {
+                const deletedCourse = await prisma.courses.delete({
+                    where: { name: name },
+                })
+                return res.status(200).json(deletedCourse)
+            }
+        } catch (e) {
+            console.log(e)
+            return res.status(500).json({ error: e })
+        } finally {
+            ;async () => {
+                await prisma.$disconnect()
+            }
+        }
+    }
 }
 module.exports = new AdminController()

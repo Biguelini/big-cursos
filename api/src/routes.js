@@ -17,7 +17,10 @@ routes.post('/users/login', UserController.loginUser)
 routes.post('/users/auth', UserController.authUser)
 routes.get('/courses', AdminController.getCourses)
 routes.post('/courses', upload.single('cover'), AdminController.postCourse)
+routes.put('/courses', AdminController.putCourse)
 routes.post('/upload', upload.single('video'), VideoController.postUpload)
 routes.post('/course', VideoController.getUniqueCourse)
+routes.post('/deleteVideo', VideoController.deleteVideo)
+routes.delete('/deleteCourse/:name', AdminController.deleteCourse)
 
 module.exports = routes

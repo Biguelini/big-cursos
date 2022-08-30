@@ -2,7 +2,7 @@ import './CardCourses.css'
 import { useNavigate } from 'react-router-dom'
 
 export default function CoursesCard(props) {
-    let navigate = useNavigate()
+    const navigate = useNavigate()
     const url = '/curso/' + props.id
     return (
         <div

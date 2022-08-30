@@ -12,7 +12,7 @@ export function Create() {
     const [content, setContent] = useState('')
 
     const onFormSubmit = (e) => {
-        e.preventDefault() // Stop form submit
+        e.preventDefault()
         fileUpload(file).then((response) => {
             console.log(response.data)
         })

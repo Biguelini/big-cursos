@@ -21,6 +21,7 @@ export function Home() {
                 {courses.map((course) => {
                     return (
                         <CardCourses
+                        key={course.id}
                             id={course.id}
                             cover={course.image}
                             title={course.name}
