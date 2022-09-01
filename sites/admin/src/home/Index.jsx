@@ -16,7 +16,7 @@ export function Home() {
     }, [])
     return (
         <div className="cursos">
-            <h1>Cursos</h1>
+            <h1>{courses.length !== 0?'Cursos':'Ainda não há curso cadastrado!'}</h1>
             <div className="listCursos">
                 {courses.map((course) => {
                     return (

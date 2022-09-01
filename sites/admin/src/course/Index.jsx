@@ -1,7 +1,7 @@
 import './Course.css'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import axios, { post } from 'axios'
+import { post } from 'axios'
 import {
     getUniqueCourse,
     putCourse,
@@ -21,7 +21,10 @@ export function Course() {
     const [content, setContent] = useState('')
     const [videos, setVideos] = useState([])
     const [isEditing, setIsEditing] = useState('false')
-    let navigate = useNavigate()
+
+    const onChange = (e) => {
+        setFile(e.target.files[0])
+    }
 
     const onFormSubmit = (e) => {
         e.preventDefault()
@@ -31,14 +34,10 @@ export function Course() {
     }
 
     const fileUpload = (file) => {
-        const url = 'http://localhost:3030/courses'
+        const url = 'http://localhost:3030/upload'
         const formData = new FormData()
-        formData.append('cover', file)
-        formData.append('name', name)
-        formData.append('subtitle', subtitle)
-        formData.append('instructor', instructor)
-        formData.append('content', content)
-        formData.append('description', description)
+        formData.append('video', file)
+        formData.append('id', idCourse)
         const config = {
             headers: {
                 'content-type': 'multipart/form-data',
@@ -46,7 +45,6 @@ export function Course() {
         }
         return post(url, formData, config)
     }
-
 
     const send = (e) => {
         e.preventDefault()
@@ -98,37 +96,65 @@ export function Course() {
     }
     const deleteCourseAction = () => {
         deleteCourse(course.name)
-        navigate('/')
+        window.location.href='http://localhost:3000/'
     }
     return (
-        <div>
+        <div className="courseEdit">
             <h1>{course.name}</h1>
-            {videos.map((video, i) => {
-                return (
-                    <div>
-                        <p>{video}</p>
-                        <button
-                            onClick={() => {
-                                remove(i)
-                            }}
-                        >
-                            {' '}
-                            Remover {i}
-                        </button>
-                    </div>
-                )
-            })}
-            <form>
-                <label htmlFor="file">Upload de aula:</label>
-                <input type="file" onChange={() => {}} />
-                <PrimaryButton text="Editar" action={sendVideo}></PrimaryButton>
-            </form>
-
-            <PrimaryButton text="Editar" action={edit}></PrimaryButton>
-            <PrimaryButton
-                text="Excluir Curso"
-                action={deleteCourseAction}
-            ></PrimaryButton>
+            <img src={course.image} alt="Course cover" />
+            <h1>Aulas</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aula</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {videos.length !== 0 ? (
+                            videos.map((video, i) => {
+                            return (
+                                <tr>
+                                    <td>
+                                        <p>{video}</p>
+                                    </td>
+                                    <td>
+                                        <PrimaryButton
+                                            text="Remover"
+                                            action={() => {
+                                                remove(i)
+                                            }}
+                                        ></PrimaryButton>
+                                    </td>
+                                </tr>
+                            )
+                        })
+                    ) : (
+                        <tr>
+                            <td>
+                                <p>Não há aulas!</p>
+                            </td>
+                            <td></td>
+                        </tr>
+                    )}
+                </tbody>
+            </table>
+            <div className="upload">
+                <form onSubmit={onFormSubmit}>
+                    <h1>Enviar aula</h1>
+                    <input type="file" onChange={onChange} />
+                    <PrimaryButton text="Fazer upload"></PrimaryButton>
+                </form>
+            </div>
+            <div className="buttons">
+                <a href="#formEdit">
+                    <PrimaryButton text="Editar" action={edit}></PrimaryButton>
+                </a>
+                <PrimaryButton
+                    text="Excluir"
+                    action={deleteCourseAction}
+                ></PrimaryButton>
+            </div>
             <div className="formCadastro">
                 <form
                     id="formEdit"

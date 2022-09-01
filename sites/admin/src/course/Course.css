@@ -1,3 +1,52 @@
 .hidden{
     display: none;
 }
+.upload{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.courseEdit{
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+.formCadastro{
+    width: 100%;
+}
+.buttons{
+    width: 30%;
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+}
+.buttons  a{
+    margin-right: 16px;
+}
+table .primaryButton{
+    font-size: 1rem;
+    margin: 8px;
+}
+table tr{
+    width: 400px;
+}
+.courseEdit .primaryButton, .courseEdit .buttons a{
+    width: 100% !important;
+}
+.courseEdit img{
+    width: 50%;
+}
+td:first-child{
+    min-width: 400px;
+}
+.courseEdit th{
+    font-size:1.5rem;
+}
+.courseEdit td{
+    font-size: 1.1rem;
+}
