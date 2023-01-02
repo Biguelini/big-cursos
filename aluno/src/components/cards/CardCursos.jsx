@@ -5,7 +5,12 @@ export default function App(props) {
     return (
         <div className="cursosCard">
             <img
-                src={process.env.PUBLIC_URL + '/images/' + props.curso + '.png'}
+                src={
+                    process.env.PUBLIC_URL +
+                    '/images/' +
+                    props.curso.toLowerCase() +
+                    '.png'
+                }
                 alt=""
                 className="img"
             />
